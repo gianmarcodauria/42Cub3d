@@ -1,0 +1,30 @@
+#include "cub3d.h"
+
+static void	windows_size(t_window *window_2d, t_window *window_3d, int file_map_width, int file_map_height)
+{
+	window_2d->width= 64 * file_map_width;
+	window_2d->height = 64 * file_map_height;
+	window_3d->width = 64 * file_map_width;
+	window_3d->height = 64 * file_map_height;
+	if (window_2d->width > 1000)
+		window_2d->width = 1000;
+	if (window_2d->height > 1000)
+		window_2d->height = 1000;
+	if (window_3d->width > 1000)
+		window_3d->width = 1000;
+	if (window_3d->height > 1000)
+		window_3d->height = 1000;
+}
+
+
+void	define_windows(t_cube *cube)
+{
+	windows_size(&cube->window_2d, &cube->window_3d, cube->file_map.width, cube->file_map.height);
+	cube->connection = mlx_init();
+
+
+	if (IS_2D)
+		cube->window_2d.window_mlx = mlx_new_window(cube->connection, cube->window_2d.width, cube->window_2d.height, "window_2d");
+	cube->window_3d.window_mlx = mlx_new_window(cube->connection, cube->window_3d.width, cube->window_3d.height, "window_3d");
+
+}
