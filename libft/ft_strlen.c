@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:45:49 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/03 16:58:11 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:29:42 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ int	ft_strlen(const char *str)
 }
 
 int	ft_arrlen(char **array)
-{
-	int	len;
-
-	len = 0;
-	if (!array)
-		return (0);
-	while (array[len])
-		len++;
-	return (len);
-}
-
-int	ft_3d_arrlen(char ***array)
 {
 	int	len;
 

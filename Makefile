@@ -21,6 +21,7 @@ SRCS = $(wildcard *.c) \
 		$(wildcard ./libft/*.c) \
 		$(wildcard ./gnl/*.c) \
 		$(wildcard ./parsing_map/*.c) \
+		$(wildcard ./draw_texture/*.c) \
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

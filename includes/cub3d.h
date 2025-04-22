@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/18 19:42:18 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:47:42 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@
 
 #define IS_2D 1
 
+#define RED 0xff0000
+#define GRAY 0x808080
+#define WHITE 0xffffff
+#define BLACK 0X000000
+#define YELLOW 0xffff00
+#define PURPLE 0x800080
+#define PINK 0xffc0cb
+#define GREEN 0x00ff00
+#define BLUE 0x0000ff
+
+#define RADIUS 2
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
+
+
 typedef struct s_dim
 {
 	int width;
@@ -34,38 +53,57 @@ typedef struct s_dim
 
 typedef struct s_window
 {
-	void	*window_mlx;
+	void	*ptr;
 	int		width;
 	int		height;
 }	t_window;
 
 typedef struct s_player
 {
+	t_point		position;
+	t_point		tile;
+
+
+	int			cardinal_direction;
+	double		direction;
+	double		perpendicular_direction;
+	double		rotate_alpha_right;
+	double		rotate_alpha_left;
+
 
 }	t_player;
 
+
 typedef struct s_map
 {
-	int			width;
-	int			height;
-	char		*texture_data;
-	char		*map_data;
-
-
-
+	int		width;
+	int		height;
+	char	*texture_data;
+	char	*map_data;
+	char	**grid;
 }	t_map;
 
 typedef struct s_image
 {
-
+	void	*ptr;
+	char	*data_addr;
+	int		size_line;
+	int		bits_x_pixel;
+	int		endian;
+	int		width;
+	int		height;
 }	t_image;
 
 /*
 - connection: e'la connessione a minilibx
 */
+
+
+
 typedef struct s_cube
 {
 	void	*connection;
+
 
 	t_window	window_2d;
 	t_window	window_3d;

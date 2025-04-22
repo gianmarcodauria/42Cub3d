@@ -8,8 +8,9 @@ void	inizialize_map_fm_file(t_map *file_map)
 	file_map->texture_data = NULL;
 	file_map->map_data = NULL;
 
-	/*
+
 	file_map->grid = NULL;
+	/*
 	file_map->player_orientation = 0;
 	file_map->player_position = (t_point){0, 0};
 	file_map->no_texture = 0;
@@ -87,7 +88,7 @@ void	initialize_win(t_window *window)
 {
 	window->width = 0;
 	window->height = 0;
-	window->window_mlx= NULL;
+	window->ptr= NULL;
 }
 
 void	initialization(t_cube *cube)

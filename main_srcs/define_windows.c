@@ -21,10 +21,8 @@ void	define_windows(t_cube *cube)
 {
 	windows_size(&cube->window_2d, &cube->window_3d, cube->file_map.width, cube->file_map.height);
 	cube->connection = mlx_init();
-
-
 	if (IS_2D)
-		cube->window_2d.window_mlx = mlx_new_window(cube->connection, cube->window_2d.width, cube->window_2d.height, "window_2d");
-	cube->window_3d.window_mlx = mlx_new_window(cube->connection, cube->window_3d.width, cube->window_3d.height, "window_3d");
+		cube->window_2d.ptr = mlx_new_window(cube->connection, cube->window_2d.width, cube->window_2d.height, "window_2d");
+	cube->window_3d.ptr = mlx_new_window(cube->connection, cube->window_3d.width, cube->window_3d.height, "window_3d");
 
 }

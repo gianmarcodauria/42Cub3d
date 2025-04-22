@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:47:15 by lpennisi          #+#    #+#             */
-/*   Updated: 2024/12/07 16:50:15 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:29:35 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		ft_isascii(int c);
 int		ft_isprint(int arg);
 int		ft_strlen(const char *str);
 int		ft_arrlen(char **array);
-int		ft_3d_arrlen(char ***array);
 int		ft_arrlen_tillstr(char **array, const char *str);
 void	*ft_memset(void *str, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
