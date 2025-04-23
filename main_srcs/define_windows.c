@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   define_windows.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/23 16:08:27 by gd-auria          #+#    #+#             */
+/*   Updated: 2025/04/23 16:08:28 by gd-auria         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
 #include "cub3d.h"
 
 static void	windows_size(t_window *window_2d, t_window *window_3d, int file_map_width, int file_map_height)

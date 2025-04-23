@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialization.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/23 16:08:33 by gd-auria          #+#    #+#             */
+/*   Updated: 2025/04/23 16:08:36 by gd-auria         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 
@@ -7,8 +19,6 @@ void	inizialize_map_fm_file(t_map *file_map)
 	file_map->height = 0;
 	file_map->texture_data = NULL;
 	file_map->map_data = NULL;
-
-
 	file_map->grid = NULL;
 	/*
 	file_map->player_orientation = 0;

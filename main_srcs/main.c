@@ -6,11 +6,12 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:41:45 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/22 19:38:21 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:08:08 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 
 int main(int argc, char **argv)
@@ -52,7 +53,5 @@ int main(int argc, char **argv)
 	//settiamo i tasti e definiamo il loop necessario
 	//alla giocabilita
 	//define_hook_loop(&cube);
-
-
 	return (0);
 }
