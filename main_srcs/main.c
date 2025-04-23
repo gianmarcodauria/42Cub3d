@@ -6,24 +6,49 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:41:45 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/23 17:16:32 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:02:19 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void initialize_cube(t_cube *cube)
+{
+	ft_memset(cube, 0, sizeof(cube));
+}
 
+int	on_2d_resize(t_cube *cube)
+{
+	mlx_destroy_image(cube->connection, cube->map_image.ptr);
+	visualize_in_2d(cube);
+	return (0);
+}
+
+void	define_hook_loop(t_cube *cube)
+{
+	//mlx_hook(cube->window_3d.ptr, KeyPress, KeyPressMask, &mov_key_press, cube);
+	//mlx_hook(cube->window_3d.ptr, KeyRelease, KeyReleaseMask, &mov_key_release, cube);
+	//mlx_hook(cube->window_3d.ptr, DestroyNotify, StructureNotifyMask, &on_destroy, cube);
+	//mlx_hook(cube->window_3d.ptr, ResizeRequest, ResizeRedirectMask, &on_3d_resize, cube);
+	if (IS_2D == 1)
+	{
+		mlx_hook(cube->window_2d.ptr, KeyPress, KeyPressMask, &mov_key_press, cube);
+		mlx_hook(cube->window_2d.ptr, KeyRelease, KeyReleaseMask, &mov_key_release, cube);
+		mlx_hook(cube->window_2d.ptr, DestroyNotify, StructureNotifyMask, &on_destroy, cube);
+		mlx_hook(cube->window_2d.ptr, ResizeRequest, ResizeRedirectMask, &on_2d_resize, cube);
+	}
+	mlx_loop_hook(cube->connection, update_movement, cube);
+	mlx_loop(cube->connection);
+}
 
 int main(int argc, char **argv)
 {
 	(void)argv;
-	//ci dichiariamo una struct principale
-	//una t_cube
+
 	t_cube cube;
-	//procediamo ad inizializzare i campi
-	//della struttura
-	//initialize_cube(&cube);
-	//controlliamo gli argc
+
+	initialize_cube(&cube);
+
 	parse_argc(argc);
 	//se risultano corretti allora
 	//costruiamo una mappa con le misure previste dove
@@ -43,6 +68,6 @@ int main(int argc, char **argv)
 */
 	//settiamo i tasti e definiamo il loop necessario
 	//alla giocabilita
-	//define_hook_loop(&cube);
+	define_hook_loop(&cube);
 	return (0);
 }

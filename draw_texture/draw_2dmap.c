@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:10:13 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/23 17:27:05 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:48:15 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ void	draw_player_in_img(t_cube *cube)
 		{
 			if (pow(point.x, 2) + pow(point.y, 2) <= RADIUS * RADIUS)
 			{
-				put_pixel(&cube->map_image, cube->player.position.x + point.x, \
-				cube->player.position.y + point.y, BLACK);
+
+				put_pixel(&cube->map_image, cube->player.position.x + point.x, cube->player.position.y + point.y, BLACK);
 			}
 			point.x++;
 		}
 		point.y++;
 	}
 }
-
 
 static void	draw_tile_with_marg(t_image *img, t_point xy, int color)
 {
@@ -104,14 +103,10 @@ void	visualize_in_2d(t_cube *cube)
 {
 
 	cube->map_image.ptr = mlx_new_image(cube->connection, cube->file_map.width * 64, cube->file_map.height * 64);
-
-
-
 	cube->map_image.data_addr = mlx_get_data_addr(cube->map_image.ptr , &cube->map_image.bits_x_pixel,  &cube->map_image.size_line,  &cube->map_image.endian);
 
-
 	draw_2d_map(&cube->map_image, cube);
-	printf("ggggg\n");
+	//printf("ggggg\n");
 	draw_player_in_img(cube);
 
 	mlx_put_image_to_window(cube->connection, cube->window_2d.ptr, cube->map_image.ptr, 0, 0);

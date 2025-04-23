@@ -10,11 +10,6 @@ MLXDIR = ./minilibx-linux
 MLXLIB = $(MLXDIR)/libmlx.a
 INCLUDE = ./includes
 
-
-MAP_PATH = path_for_maps/maps/strict.cub
-EXE = $(NAME) $(MAP_PATH)
-
-
 INCLUDES = -I$(INCLUDE) -I$(MLXDIR) -I$(LIBFTDIR)
 MLX_FLAGS = -L$(MLXDIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 
@@ -24,6 +19,7 @@ SRCS = $(wildcard *.c) \
 		$(wildcard ./gnl/*.c) \
 		$(wildcard ./parsing_map/*.c) \
 		$(wildcard ./draw_texture/*.c) \
+		$(wildcard ./movement/*.c) \
 
 OBJDIR = objs_cub3d
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
