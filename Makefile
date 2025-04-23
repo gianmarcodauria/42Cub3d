@@ -3,11 +3,13 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lreadline -lncurses -LIBFTDIR
 
+
 LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
 MLXDIR = ./minilibx-linux
 MLXLIB = $(MLXDIR)/libmlx.a
 INCLUDE = ./includes
+
 
 MAP_PATH = res/maps/subject.cub
 EXE = $(NAME) $(MAP_PATH)
@@ -23,7 +25,7 @@ SRCS = $(wildcard *.c) \
 		$(wildcard ./parsing_map/*.c) \
 		$(wildcard ./draw_texture/*.c) \
 
-OBJDIR = objs
+OBJDIR = objs_cub3d
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 $(OBJDIR)/%.o: %.c

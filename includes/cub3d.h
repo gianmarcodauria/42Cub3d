@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/22 19:47:42 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:44:38 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,6 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
-
-/*
-- connection: e'la connessione a minilibx
-*/
-
 
 
 typedef struct s_cube
