@@ -6,14 +6,13 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:32:27 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/22 20:04:03 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:17:58 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-void parse_argc(int argc)
+void	parse_argc(int argc)
 {
 	if (argc != 2)
 	{
@@ -160,7 +159,7 @@ void	parse_and_check(t_cube *cube)
 }
 
 
-void define_map(t_cube *cube, char *path_of_map)
+void	define_map(t_cube *cube, char *path_of_map)
 {
 	int		fd;
 	char	*extention;
