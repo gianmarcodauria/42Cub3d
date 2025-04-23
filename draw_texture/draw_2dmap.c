@@ -6,10 +6,9 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:10:13 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/23 16:10:15 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:27:05 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -19,7 +18,8 @@ void	put_pixel(t_image *img, int x, int y, int color)
 
 	if (y < 0 || x < 0)
 		return ;
-	pixel = (int *)(img->data_addr + (y * img->size_line + x * (img->bits_x_pixel / 8)));
+	pixel = (int *)(img->data_addr + \
+	(y * img->size_line + x * (img->bits_x_pixel / 8)));
 	*pixel = color;
 }
 

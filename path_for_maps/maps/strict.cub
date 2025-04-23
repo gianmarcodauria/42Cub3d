@@ -1,7 +1,7 @@
-NO res/texture/matrix.xpm
-EA res/texture/matrix.xpm
-SO res/texture/matrix.xpm
-WE res/texture/matrix.xpm
+NO path_for_mapstexture/matrix.xpm
+EA path_for_mapstexture/matrix.xpm
+SO path_for_mapstexture/matrix.xpm
+WE path_for_mapstexture/matrix.xpm
 
 F 0,0,0
 C 0,0,0

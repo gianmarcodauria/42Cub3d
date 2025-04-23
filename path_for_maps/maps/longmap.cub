@@ -1,7 +1,7 @@
-NO res/texture/muro.xpm
-EA res/texture/muro.xpm
-SO res/texture/muro.xpm
-WE res/texture/muro.xpm
+NO path_for_mapstexture/muro.xpm
+EA path_for_mapstexture/muro.xpm
+SO path_for_mapstexture/muro.xpm
+WE path_for_mapstexture/muro.xpm
 
 C 100,150,255
 F 100,100,100

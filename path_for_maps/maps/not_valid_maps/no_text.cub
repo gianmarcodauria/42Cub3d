@@ -1,14 +1,13 @@
-NO res/texture/n_flame.xpm
-SO res/texture/s_flame.xpm
-WE res/texture/w_flame.xpm
-EA res/texture/e_flame.xpm
+SO  path_for_mapstexture/goofy_aaa_cao.xpm
+WE  path_for_mapstexture/goofy_aaa_porta.xpm
+EA  path_for_mapstexture/foo.xpm
 
 F 220,100,0
 C 0,30,4
 
 1111111111111111111111111
 1000000000110000000000001
-101100000111000000N000001
+101100000111000000W000001
 1001000000000000000000001
 1111111110110000011100001111111
 100000000011000001110111111111111

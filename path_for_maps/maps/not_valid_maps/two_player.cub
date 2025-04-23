@@ -1,10 +1,10 @@
-NO res/texture/foo.xpm
-SO res/texture/foo.xpm
-WE res/texture/foo.xpm
-EA res/texture/foo.xpm
+NO path_for_mapstexture/foo.xpm
+SO path_for_mapstexture/foo.xpm
+WE path_for_mapstexture/foo.xpm
+EA path_for_mapstexture/foo.xpm
 
 F 220,100,0
-C 0,30,4 
+C 0,30,4
 
 1111111111111111111111111
 1000000000110000000000001

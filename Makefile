@@ -11,7 +11,7 @@ MLXLIB = $(MLXDIR)/libmlx.a
 INCLUDE = ./includes
 
 
-MAP_PATH = res/maps/subject.cub
+MAP_PATH = path_for_maps/maps/strict.cub
 EXE = $(NAME) $(MAP_PATH)
 
 
