@@ -6,16 +6,13 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:41:45 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/23 23:02:19 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:38:30 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void initialize_cube(t_cube *cube)
-{
-	ft_memset(cube, 0, sizeof(cube));
-}
+
 
 int	on_2d_resize(t_cube *cube)
 {
@@ -33,9 +30,9 @@ void	define_hook_loop(t_cube *cube)
 	if (IS_2D == 1)
 	{
 		mlx_hook(cube->window_2d.ptr, KeyPress, KeyPressMask, &mov_key_press, cube);
-		mlx_hook(cube->window_2d.ptr, KeyRelease, KeyReleaseMask, &mov_key_release, cube);
-		mlx_hook(cube->window_2d.ptr, DestroyNotify, StructureNotifyMask, &on_destroy, cube);
-		mlx_hook(cube->window_2d.ptr, ResizeRequest, ResizeRedirectMask, &on_2d_resize, cube);
+		//mlx_hook(cube->window_2d.ptr, KeyRelease, KeyReleaseMask, &mov_key_release, cube);
+		//mlx_hook(cube->window_2d.ptr, DestroyNotify, StructureNotifyMask, &on_destroy, cube);
+		//mlx_hook(cube->window_2d.ptr, ResizeRequest, ResizeRedirectMask, &on_2d_resize, cube);
 	}
 	mlx_loop_hook(cube->connection, update_movement, cube);
 	mlx_loop(cube->connection);
@@ -47,8 +44,8 @@ int main(int argc, char **argv)
 
 	t_cube cube;
 
-	initialize_cube(&cube);
 
+	initialization(&cube);
 	parse_argc(argc);
 	//se risultano corretti allora
 	//costruiamo una mappa con le misure previste dove

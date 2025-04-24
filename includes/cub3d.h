@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/23 22:51:54 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:37:59 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@
 #define NW 22
 #define N 24
 
-#define WW 119
-#define SS 115
-#define AA 97
-#define DD 100
+#define KEY_W 119
+#define KEY_S 115
+#define KEY_A 97
+#define KEY_D 100
 #define ESC 65307
 #define LEFT 65361
 #define RIGHT 65363
@@ -171,7 +171,7 @@ typedef struct s_cube
 //FUNCTIONS IN MAIN.C FILE
 
 void parse_argc(int argc);
-void initialize_cube(t_cube *cube);
+void initialization(t_cube *cube);
 void define_map(t_cube *cube, char *path_of_map);
 void define_windows(t_cube *cube);
 void define_textures(t_cube *cube);

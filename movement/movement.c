@@ -32,13 +32,13 @@ int	on_destroy(t_cube *cube)
 
 static void	mov_key_release_position(int keycode, t_cube *cube)
 {
-	if (keycode == WW)
+	if (keycode == KEY_W)
 		cube->player.move.w = 0;
-	if (keycode == SS)
+	if (keycode == KEY_S)
 		cube->player.move.s = 0;
-	if (keycode == AA)
+	if (keycode == KEY_A)
 		cube->player.move.a = 0;
-	if (keycode == DD)
+	if (keycode == KEY_D)
 		cube->player.move.d = 0;
 }
 
@@ -376,8 +376,7 @@ int	moving(t_cube *cube)
 	{
 		if (step_management(&cube->player, foot_step_decrement))
 		{
-			if (!is_collision(cube->player.position.x, \
-			cube->player.position.y, cube))
+			if (!is_collision(cube->player.position.x, cube->player.position.y, cube))
 			{
 				cube->player.tile = find_tile(cube->player.position);
 				return (TRUE);
@@ -470,39 +469,30 @@ int	update_alpha_rotation(void *param)
 int	update_movement(void *param)
 {
 	int	pos_updated;
-	int	rot_updated;
+	//int	rot_updated;
 
 	pos_updated = update_position(param);
-	rot_updated = update_alpha_rotation(param);
-	if (pos_updated || rot_updated)
+	//rot_updated = update_alpha_rotation(param);
+	// if (pos_updated || rot_updated)
+	// 	drawing_routine((t_cube *)param);
+	if (pos_updated)
 		drawing_routine((t_cube *)param);
+
 	return (0);
 }
 
-/*this function manages the press of movement's player keycode
-it is called by key_press() which is the call-back function managed by mlx_hook
-Now, Questa funzioine è void ed ha due parametri perchè per costruzione fornisc
-elementi di informazioni alla funzione di coll_back che ora abbiao citato.
-La funzione di callback non può essere diversa da come è in termini di firma.
-E quindi a cascata questa funzione anche è cosi.
-deve avere un keycode. Questa funzione gestisceil keycode che le viene passato.
-se il keycode è di un certo tipo allora setta il movimento del player.
-
-*/
 static void	mov_key_press_position(int keycode, t_cube *cube)
 {
-	if (keycode == WW)
+	if (keycode == KEY_W)
 		cube->player.move.w = 1;
-	if (keycode == SS)
+	if (keycode == KEY_S)
 		cube->player.move.s = 1;
-	if (keycode == AA)
+	if (keycode == KEY_A)
 		cube->player.move.a = 1;
-	if (keycode == DD)
+	if (keycode == KEY_D)
 		cube->player.move.d = 1;
 }
 
-/*it is called by key_press which is the call-back function managed by mlx_hook
-vedi spiegazione di keypress_playerposition*/
 static void	mov_key_press_rotation(int keycode, t_cube *cube)
 {
 	if (keycode == RIGHT)
@@ -511,25 +501,12 @@ static void	mov_key_press_rotation(int keycode, t_cube *cube)
 		cube->player.rotate_alpha_left = 1;
 }
 
-/*this function has to be this sign becouse it is called in mlx_hook
-in altri termini è obbligatorio avere un parametro int e uno void*.
-Al parametro int è passato il keycode dalla funzione mlx_hook.
-Quella funziona attualmente è impaostat acon un codice evento
-(Che non è il keycode)
-2. il codice evento 2 indiche che quella funzione è in ascolto sugli eventi di
-pressione della tastiera.
-Ecco quindi che restituirà il keycode(codice tel tasto della tastiera)
-che è stato pigiato.
-Ecco quindi che la palla passa alle funzioni che keypress ha internamente.
-In pratica key_press riceve il keycode.
-e successivamente il keycode è gestito da key_oress playerposiziont
- e keypressplayer direction
-*/
 int	mov_key_press(int keycode, void *param)
 {
 	t_cube	*cube;
 
 	cube = (t_cube *)param;
+
 	// if (keycode == ESC)
 	// 	on_destroy(cube);
 	mov_key_press_position(keycode, cube);

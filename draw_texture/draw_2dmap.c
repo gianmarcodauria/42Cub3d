@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:10:13 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/23 19:48:15 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:03:13 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	draw_2d_map(t_image *img, t_cube *cube)
 	y = -1;
 	while (++y < 0 + cube->file_map.height)
 	{
-		printf("ss\n"); // INIZIALIZZA TUTTO CON MEMSET
 		x = -1;
 		while (++x < 0 + cube->file_map.width)
 		{
@@ -106,11 +105,7 @@ void	visualize_in_2d(t_cube *cube)
 	cube->map_image.data_addr = mlx_get_data_addr(cube->map_image.ptr , &cube->map_image.bits_x_pixel,  &cube->map_image.size_line,  &cube->map_image.endian);
 
 	draw_2d_map(&cube->map_image, cube);
-	//printf("ggggg\n");
 	draw_player_in_img(cube);
-
 	mlx_put_image_to_window(cube->connection, cube->window_2d.ptr, cube->map_image.ptr, 0, 0);
-	mlx_loop(cube->connection); //questa va eliminata dopo aver attivato il define_loop
-
 	//draw_2d_fov_boundaries(cube);
 }
