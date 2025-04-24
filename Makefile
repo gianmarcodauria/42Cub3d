@@ -18,8 +18,10 @@ SRCS = $(wildcard *.c) \
 		$(wildcard ./libft/*.c) \
 		$(wildcard ./gnl/*.c) \
 		$(wildcard ./parsing_map/*.c) \
-		$(wildcard ./draw_texture/*.c) \
 		$(wildcard ./movement/*.c) \
+		$(wildcard ./drawing/*.c) \
+		$(wildcard ./raycasting/*.c) \
+
 
 OBJDIR = objs_cub3d
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

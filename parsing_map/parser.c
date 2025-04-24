@@ -40,7 +40,7 @@ void	exit_message(t_cube *cube, char *message)
 {
 	printf("%s\n", message);
 	if (cube)
-		//on_destroy(cube);
+		//destroy(cube);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:41:45 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/24 19:38:30 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:59:39 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-int	on_2d_resize(t_cube *cube)
+int	w2d_resize(t_cube *cube)
 {
 	mlx_destroy_image(cube->connection, cube->map_image.ptr);
 	visualize_in_2d(cube);
@@ -25,14 +25,14 @@ void	define_hook_loop(t_cube *cube)
 {
 	//mlx_hook(cube->window_3d.ptr, KeyPress, KeyPressMask, &mov_key_press, cube);
 	//mlx_hook(cube->window_3d.ptr, KeyRelease, KeyReleaseMask, &mov_key_release, cube);
-	//mlx_hook(cube->window_3d.ptr, DestroyNotify, StructureNotifyMask, &on_destroy, cube);
+	//mlx_hook(cube->window_3d.ptr, DestroyNotify, StructureNotifyMask, &destroy, cube);
 	//mlx_hook(cube->window_3d.ptr, ResizeRequest, ResizeRedirectMask, &on_3d_resize, cube);
 	if (IS_2D == 1)
 	{
-		mlx_hook(cube->window_2d.ptr, KeyPress, KeyPressMask, &mov_key_press, cube);
-		//mlx_hook(cube->window_2d.ptr, KeyRelease, KeyReleaseMask, &mov_key_release, cube);
-		//mlx_hook(cube->window_2d.ptr, DestroyNotify, StructureNotifyMask, &on_destroy, cube);
-		//mlx_hook(cube->window_2d.ptr, ResizeRequest, ResizeRedirectMask, &on_2d_resize, cube);
+		mlx_hook(cube->window_2d.ptr, KeyPress, KeyPressMask, &key_press, cube);
+		mlx_hook(cube->window_2d.ptr, KeyRelease, KeyReleaseMask, &key_release, cube);
+		mlx_hook(cube->window_2d.ptr, DestroyNotify, StructureNotifyMask, &destroy, cube);
+		mlx_hook(cube->window_2d.ptr, ResizeRequest, ResizeRedirectMask, &w2d_resize, cube);
 	}
 	mlx_loop_hook(cube->connection, update_movement, cube);
 	mlx_loop(cube->connection);

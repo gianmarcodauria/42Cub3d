@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/24 19:37:59 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:14:45 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@
 #define NW 22
 #define N 24
 
-#define KEY_W 119
-#define KEY_S 115
-#define KEY_A 97
-#define KEY_D 100
+#define WW 119
+#define SS 115
+#define AA 97
+#define DD 100
 #define ESC 65307
 #define LEFT 65361
 #define RIGHT 65363
@@ -65,7 +65,15 @@
 #define TRUE 1
 #define FALSE 0
 
-//promemoria in caso vuoi cambiare nomi
+typedef struct s_bras_params
+{
+	t_point	xy0;
+	t_point	dx;
+	t_point	sx;
+	int		color;
+}	t_bras_params;
+
+
 typedef struct s_fov
 {
 	double	angle;
@@ -121,8 +129,8 @@ typedef struct s_player
 	int			cardinal_direction;
 	double		direction;
 	double		perpendicular_direction;
-	double		rotate_alpha_right;
-	double		rotate_alpha_left;
+	double		rotate_right;
+	double		rotate_left;
 	t_fov		fov;
 
 }	t_player;
@@ -172,6 +180,7 @@ typedef struct s_cube
 
 void parse_argc(int argc);
 void initialization(t_cube *cube);
+void	point_init(t_point *point_to_initialize);
 void define_map(t_cube *cube, char *path_of_map);
 void define_windows(t_cube *cube);
 void define_textures(t_cube *cube);
@@ -180,8 +189,17 @@ void visualize_in_3d(t_cube *cube);
 void define_hook_loop(t_cube *cube);
 void check_map_closed(t_cube *cube, char **map_lines);
 void exit_message(t_cube *cube, char *message);
-int	mov_key_press(int keycode, void *param);
 int	update_movement(void *param);
 t_point	find_tile(t_point point);
-int	mov_key_release(int keycode, void *param);
-int	on_destroy(t_cube *cube);
+int	key_press(int keycode, void *param);
+int	key_release(int keycode, void *param);
+int	destroy(t_cube *cube);
+int	step_management(t_player *player, int foot_step_decrement);
+int	is_collision(double player_next_x, double player_next_y, t_cube *cube);
+void	drawing_routine(t_cube *cube);
+void	move_player_mains(int direction, t_move move, t_point *position, int step_decr);
+void	move_player_oblq(int direction, t_move move, t_point *position, int step_decr);
+int	get_direction(double perpendicular_direction);
+void	drawing_routine(t_cube *cube);
+
+
