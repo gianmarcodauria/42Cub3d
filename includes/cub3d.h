@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/25 17:22:57 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:54:37 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@
 #define TRUE 1
 #define FALSE 0
 
+#define SHOW_WITH_COLORS 1
+
+#define  NUM_OF_RAYS 1000
+
+#define CAMERA_DISTANCE 20
+
+#define SCALE_FACTOR 10000
 
 
 typedef struct s_point
@@ -121,6 +128,11 @@ typedef struct s_ray
 	t_point	spawn_point;
 	t_point	end_point;
 	int		last_increment;
+	double	height_wall_line;
+	double	x_wall_line;
+	t_point	point_projection;
+	double	len_projection;
+
 
 }	t_ray;
 
@@ -157,6 +169,8 @@ typedef struct s_map
 	t_point	player_position;
 	int		player_orientation;
 	char	**grid;
+	char	*floor_color;
+	char	*ceiling_color;
 }	t_map;
 
 typedef struct s_image
@@ -229,5 +243,20 @@ void	initialize_ray(t_ray *ray);
 int	north(int x, int y, t_cube *cube);
 int	n_corner(int x, int y, t_cube *cube);
 int	west(int x, int y, t_cube *cube);
+void	draw_3d_scene(t_cube *cube);
+void	draw_3d_fov(t_cube *cube);
 
 
+void	put_pixel(t_image *img, int x, int y, int color);
+int	get_color_in_hex(char *color);
+
+t_point	find_intersection(t_point p1, double p1_ang, t_point p2, double p2_ang);
+double	pitagora_theorem(t_point spawn_point, t_point second_point);
+
+void	bresenham(t_cube *cube, int x1, int y1, int color);
+
+int	get_pixel(t_image *image, int x, int y);
+double	calculate_3d_wall_height(t_player player);
+
+double	find_x_3d(double ray_angle, double fov_left_ray, double win_width);
+int	find_x_texture(t_point impact_point, t_ray ray);

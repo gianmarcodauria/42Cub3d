@@ -3,8 +3,8 @@
 
 void	free_raw_map(t_cube *cube)
 {
-	// if (cube->file_map.texture_data)
-	// 	free(cube->file_map.texture_data);
+	if (cube->file_map.texture_data)
+	 	free(cube->file_map.texture_data);
 	if (cube->file_map.map_data)
 		free(cube->file_map.map_data);
 	if (cube->file_map.grid)
@@ -16,8 +16,8 @@ void	free_raw_map(t_cube *cube)
 int	destroy(t_cube *cube)
 {
 	free_raw_map(cube);
-	// if (cube->win_3d.ptr)
-	// 	mlx_destroy_window(cube->connection, cube->win_3d.ptr);
+	 if (cube->window_3d.ptr)
+ 		mlx_destroy_window(cube->connection, cube->window_3d.ptr);
 	if (cube->window_2d.ptr)
 		mlx_destroy_window(cube->connection, cube->window_2d.ptr);
 	if (cube->connection)

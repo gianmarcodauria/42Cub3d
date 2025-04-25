@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:08:27 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/24 19:28:19 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:47:08 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	define_windows(t_cube *cube)
 	cube->connection = mlx_init();
 	if (IS_2D == 1)
 		cube->window_2d.ptr = mlx_new_window(cube->connection, cube->window_2d.width, cube->window_2d.height, "window_2d");
-	//cube->window_3d.ptr = mlx_new_window(cube->connection, cube->window_3d.width, cube->window_3d.height, "window_3d");
+	cube->window_3d.ptr = mlx_new_window(cube->connection, cube->window_3d.width, cube->window_3d.height, "window_3d");
 }
