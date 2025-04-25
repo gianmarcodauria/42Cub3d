@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dda_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:18:50 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/03/15 17:23:14 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:01:58 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "c3d.h"
+#include "cub3d.h"
 
 static int	check_ne(char **map_grid, double card_dir, t_point p)
 {
@@ -21,11 +21,11 @@ static int	check_ne(char **map_grid, double card_dir, t_point p)
 	w = ft_arrlen(map_grid);
 	if (card_dir == NE)
 	{
-		if ((int)p.y / TILE_SIZE >= w || ((int)p.x - 1) / TILE_SIZE >= h \
-		|| ((int)p.y + 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
+		if ((int)p.y / 64 >= w || ((int)p.x - 1) / 64 >= h \
+		|| ((int)p.y + 1) / 64 >= w || (int)p.x / 64 >= h)
 			return (FALSE);
-		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x - 1) / TILE_SIZE] == '1' \
-		&& map_grid[((int)p.y + 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
+		if (map_grid[(int)p.y / 64][((int)p.x - 1) / 64] == '1' \
+		&& map_grid[((int)p.y + 1) / 64][(int)p.x / 64] == '1')
 		{
 			p.x = p.x - 1;
 			p.y = p.y + 1;
@@ -44,11 +44,11 @@ static int	check_nw(char **map_grid, double card_dir, t_point p)
 	w = ft_arrlen(map_grid);
 	if (card_dir == NW)
 	{
-		if ((int)p.y / TILE_SIZE >= w || ((int)p.x + 1) / TILE_SIZE >= h \
-		|| ((int)p.y + 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
+		if ((int)p.y / 64 >= w || ((int)p.x + 1) / 64 >= h \
+		|| ((int)p.y + 1) / 64 >= w || (int)p.x / 64 >= h)
 			return (FALSE);
-		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x + 1) / TILE_SIZE] == '1' \
-		&& map_grid[((int)p.y + 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
+		if (map_grid[(int)p.y / 64][((int)p.x + 1) / 64] == '1' \
+		&& map_grid[((int)p.y + 1) / 64][(int)p.x / 64] == '1')
 		{
 			p.x = p.x - 1;
 			p.y = p.y + 1;
@@ -67,11 +67,11 @@ static int	check_se(char **map_grid, double card_dir, t_point p)
 	w = ft_arrlen(map_grid);
 	if (card_dir == SE)
 	{
-		if ((int)p.y / TILE_SIZE >= w || ((int)p.x - 1) / TILE_SIZE >= h \
-		|| ((int)p.y - 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
+		if ((int)p.y / 64 >= w || ((int)p.x - 1) / 64 >= h \
+		|| ((int)p.y - 1) / 64 >= w || (int)p.x / 64 >= h)
 			return (FALSE);
-		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x - 1) / TILE_SIZE] == '1' \
-		&& map_grid[((int)p.y - 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
+		if (map_grid[(int)p.y / 64][((int)p.x - 1) / 64] == '1' \
+		&& map_grid[((int)p.y - 1) / 64][(int)p.x / 64] == '1')
 		{
 			p.x = p.x - 1;
 			p.y = p.y + 1;
@@ -90,11 +90,11 @@ static int	check_sw(char **map_grid, double card_dir, t_point p)
 	w = ft_arrlen(map_grid);
 	if (card_dir == SW)
 	{
-		if ((int)p.y / TILE_SIZE >= w || ((int)p.x + 1) / TILE_SIZE >= h \
-		|| ((int)p.y - 1) / TILE_SIZE >= w || (int)p.x / TILE_SIZE >= h)
+		if ((int)p.y / 64 >= w || ((int)p.x + 1) / 64 >= h \
+		|| ((int)p.y - 1) / 64 >= w || (int)p.x / 64 >= h)
 			return (FALSE);
-		if (map_grid[(int)p.y / TILE_SIZE][((int)p.x + 1) / TILE_SIZE] == '1' \
-		&& map_grid[((int)p.y - 1) / TILE_SIZE][(int)p.x / TILE_SIZE] == '1')
+		if (map_grid[(int)p.y / 64][((int)p.x + 1) / 64] == '1' \
+		&& map_grid[((int)p.y - 1) / 64][(int)p.x / 64] == '1')
 		{
 			p.x = p.x - 1;
 			p.y = p.y + 1;

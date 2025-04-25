@@ -30,36 +30,6 @@ int	destroy(t_cube *cube)
 	return (exit(0), 0);
 }
 
-
-
-int	is_it_a_wall(t_point point_to_verify, char **map_grid)
-{
-	int	map_height;
-	int	map_width;
-
-	map_width = ft_strlen(map_grid[0]);
-	map_height = ft_arrlen(map_grid);
-	if (point_to_verify.x / 64 >= map_width || \
-	point_to_verify.y / 64 >= map_height)
-		return (FALSE);
-	if (map_grid[(int)point_to_verify.y / 64][\
-	(int)point_to_verify.x / 64] == '1')
-		return (TRUE);
-	return (FALSE);
-}
-
-
-
-int	is_it_inside_map_perimeter(t_point point, int map_width, int map_height)
-{
-	if (point.x >= 64 && point.x < (map_width* 64 - 64) && point.y >= 64 && point.y < (map_height * 64) - 64)
-		return (TRUE);
-	return (FALSE);
-}
-
-
-
-
 t_point	get_circ_point(t_point player_next_position, double angle)
 {
 	t_point	circ_point;

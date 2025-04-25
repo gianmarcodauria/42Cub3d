@@ -6,7 +6,7 @@
 /*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/24 21:14:45 by gd-auria         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:22:57 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 #include "libft.h"
 
 #define IS_2D 1
+#define PI_FIX 0.00000001
+#define EPSILON 1e-9
+
+#define INCREMENT_X 1
+#define INCREMENT_Y 0
 
 #define RED 0xff0000
 #define GRAY 0x808080
@@ -65,6 +70,14 @@
 #define TRUE 1
 #define FALSE 0
 
+
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
+
 typedef struct s_bras_params
 {
 	t_point	xy0;
@@ -81,11 +94,6 @@ typedef struct s_fov
 	double	half_right;
 }	t_fov;
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-}	t_point;
 
 
 typedef struct s_dim
@@ -105,11 +113,14 @@ typedef struct s_window
 typedef struct s_ray
 {
 	int		cardinal_direction;
+	int		orientation;
 	t_point	first_side_point;
 	t_point	first_impact_point;
 	t_point	delta;
 	t_point	path;
-	t_point	first_point;
+	t_point	spawn_point;
+	t_point	end_point;
+	int		last_increment;
 
 }	t_ray;
 
@@ -132,6 +143,7 @@ typedef struct s_player
 	double		rotate_right;
 	double		rotate_left;
 	t_fov		fov;
+	t_ray		ray;
 
 }	t_player;
 
@@ -201,5 +213,21 @@ void	move_player_mains(int direction, t_move move, t_point *position, int step_d
 void	move_player_oblq(int direction, t_move move, t_point *position, int step_decr);
 int	get_direction(double perpendicular_direction);
 void	drawing_routine(t_cube *cube);
+t_point	chose_side_point(t_point spawn_point, int cardinal_direction);
+t_point	calculate_path(t_point delta, double alpha);
+t_point	calc_delta(t_point spawn_point, t_point second_point, int direction);
+t_point	calculate_end_point(t_ray *ray, double alpha, t_cube *c3d);
+t_point	trigonometric_point_calc(t_point point, double path, double alpha);
+
+t_ray	dda(t_point start_point, double alpha, t_cube *c3d);
+int	is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point p);
+int	is_it_a_wall(t_point point_to_verify, char **map_grid);
+int	get_cardinal_direction(double angle);
+int	is_it_inside_map_perimeter(t_point point, int width, int height);
+void	initialize_ray(t_ray *ray);
+
+int	north(int x, int y, t_cube *cube);
+int	n_corner(int x, int y, t_cube *cube);
+int	west(int x, int y, t_cube *cube);
 
 

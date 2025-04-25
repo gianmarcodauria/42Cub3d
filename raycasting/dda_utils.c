@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   dda_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpennisi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gd-auria <gd-auria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:18:24 by lpennisi          #+#    #+#             */
-/*   Updated: 2025/03/15 17:15:32 by lpennisi         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:10:25 by gd-auria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "c3d.h"
+#include "cub3d.h"
 
-double	pitagora_theorem(t_point first_point, t_point second_point)
+double	pitagora_theorem(t_point spawn_point, t_point second_point)
 {
 	double	result;
 	double	dx;
 	double	dy;
 
-	dx = first_point.x - second_point.x;
-	dy = first_point.y - second_point.y;
+	dx = spawn_point.x - second_point.x;
+	dy = spawn_point.y - second_point.y;
 	result = sqrt(pow(dx, 2) + pow(dy, 2));
 	return (result);
 }
@@ -53,21 +53,21 @@ int	is_it_a_wall(t_point point_to_verify, char **map_grid)
 
 	map_width = ft_strlen(map_grid[0]);
 	map_height = ft_arrlen(map_grid);
-	if (point_to_verify.x / TILE_SIZE >= map_width || \
-	point_to_verify.y / TILE_SIZE >= map_height)
+	if (point_to_verify.x / 64 >= map_width || \
+	point_to_verify.y / 64 >= map_height)
 		return (FALSE);
-	if (map_grid[(int)point_to_verify.y / TILE_SIZE][\
-	(int)point_to_verify.x / TILE_SIZE] == '1')
+	if (map_grid[(int)point_to_verify.y / 64][\
+	(int)point_to_verify.x / 64] == '1')
 		return (TRUE);
 	return (FALSE);
 }
 
-int	is_it_inside_map_perimeter(t_point point, t_dimension map_dimension)
+int	is_it_inside_map_perimeter(t_point point, int width, int height)
 {
-	if (point.x >= TILE_SIZE && \
-	point.x < (map_dimension.w * TILE_SIZE - TILE_SIZE) && \
-	point.y >= TILE_SIZE && \
-	point.y < (map_dimension.h * TILE_SIZE) - TILE_SIZE)
+	if (point.x >= 64 && \
+	point.x < (width * 64 - 64) && \
+	point.y >= 64 && \
+	point.y < (height * 64) - 64)
 		return (TRUE);
 	return (FALSE);
 }
