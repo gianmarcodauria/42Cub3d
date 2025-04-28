@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   directions_mains.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:32:57 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:34:01 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	move_face_north(t_move move, t_point *position, int step_decr)
@@ -48,7 +60,8 @@ void	move_face_west(t_move move, t_point *position, int step_decr)
 		position->y -= (FOOT_JOB - step_decr);
 }
 
-void	move_player_mains(int direction, t_move move, t_point *position, int step_decr)
+void	move_player_mains(int direction, t_move move, t_point *position,
+			int step_decr)
 {
 	if (direction == N)
 		move_face_north(move, position, step_decr);

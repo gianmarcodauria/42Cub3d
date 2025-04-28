@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   directions_oblq.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:32:47 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:33:42 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	move_face_north_east(t_move move, t_point *position, int step_decr)
@@ -96,7 +108,8 @@ void	move_face_south_west(t_move move, t_point *position, int step_decr)
 	}
 }
 
-void	move_player_oblq(int direction, t_move move, t_point *position, int step_decr)
+void	move_player_oblq(int direction, t_move move, t_point *position,
+			int step_decr)
 {
 	if (direction == NE)
 		move_face_north_east(move, position, step_decr);

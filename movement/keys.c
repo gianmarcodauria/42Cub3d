@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:33:04 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:34:19 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	key_release_position(int keycode, t_cube *cube)
@@ -55,9 +67,8 @@ int	key_press(int keycode, void *param)
 	t_cube	*cube;
 
 	cube = (t_cube *)param;
-
-	 if (keycode == ESC)
-	 	destroy(cube);
+	if (keycode == ESC)
+		destroy(cube);
 	key_press_position(keycode, cube);
 	key_press_rotation(keycode, cube);
 	return (0);

@@ -1,10 +1,21 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:30:54 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:31:33 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3d.h"
 
 void	free_raw_map(t_cube *cube)
 {
 	if (cube->file_map.texture_data)
-	 	free(cube->file_map.texture_data);
+		free(cube->file_map.texture_data);
 	if (cube->file_map.map_data)
 		free(cube->file_map.map_data);
 	if (cube->file_map.grid)
@@ -16,8 +27,8 @@ void	free_raw_map(t_cube *cube)
 int	destroy(t_cube *cube)
 {
 	free_raw_map(cube);
-	 if (cube->window_3d.ptr)
- 		mlx_destroy_window(cube->connection, cube->window_3d.ptr);
+	if (cube->window_3d.ptr)
+		mlx_destroy_window(cube->connection, cube->window_3d.ptr);
 	if (cube->window_2d.ptr)
 		mlx_destroy_window(cube->connection, cube->window_2d.ptr);
 	if (cube->connection)
@@ -56,7 +67,8 @@ int	is_collision(double player_next_x, double player_next_y, t_cube *cube)
 	{
 		angle = 2 * PI_G * loop / CIRCUMFERENCE_CHECKS;
 		circ_point = get_circ_point(player_next_position, angle);
-		if (is_it_inside_map_perimeter(circ_point, cube->file_map.width, cube->file_map.height))
+		if (is_it_inside_map_perimeter(circ_point, cube->file_map.width,
+				cube->file_map.height))
 		{
 			if (is_it_a_wall(circ_point, cube->file_map.grid))
 				return (TRUE);

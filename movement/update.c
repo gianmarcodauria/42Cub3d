@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:28:58 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:30:39 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	get_direction(double perpendicular_direction)
@@ -54,7 +66,8 @@ int	moving(t_cube *cube)
 	{
 		if (step_management(&cube->player, i))
 		{
-			if (!is_collision(cube->player.position.x, cube->player.position.y, cube))
+			if (!is_collision(cube->player.position.x, cube->player.position.y,
+					cube))
 			{
 				cube->player.tile = find_tile(cube->player.position);
 				return (TRUE);
@@ -70,9 +83,9 @@ int	moving(t_cube *cube)
 int	update_position(void *param)
 {
 	t_cube	*cube;
-	int ret;
-	cube = (t_cube *)param;
+	int		ret;
 
+	cube = (t_cube *)param;
 	ret = moving(cube);
 	return (ret);
 }
@@ -99,7 +112,6 @@ int	set_rotation(t_cube *cube)
 	return (has_rotated);
 }
 
-
 int	update_rotation(void *param)
 {
 	t_cube	*cube;
@@ -122,6 +134,6 @@ int	update_movement(void *param)
 	pos_updated = update_position(param);
 	rot_updated = update_rotation(param);
 	if (pos_updated || rot_updated)
-	 	drawing_routine((t_cube *)param);
+		drawing_routine((t_cube *)param);
 	return (0);
 }
