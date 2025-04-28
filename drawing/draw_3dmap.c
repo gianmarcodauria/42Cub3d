@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_3dmap.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 16:47:06 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 16:48:30 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	get_color_in_hex(char *color)
@@ -20,7 +32,6 @@ void	draw_floor(t_cube *cube)
 {
 	int	x;
 	int	y;
-
 
 	x = 0;
 	y = cube->window_3d.height / 2;
@@ -62,8 +73,6 @@ void	draw_3d_scene(t_cube *cube)
 {
 	cube->scene3d.width = cube->window_3d.width;
 	cube->scene3d.height = cube->window_3d.height;
-
-
 	cube->scene3d.ptr = mlx_new_image(cube->connection, \
 	cube->window_3d.width, cube->window_3d.height);
 	cube->scene3d.data_addr = mlx_get_data_addr(cube->scene3d.ptr, \
@@ -72,7 +81,6 @@ void	draw_3d_scene(t_cube *cube)
 	draw_floor(cube);
 	draw_ceiling(cube);
 	printf("ssssssss\n");
-
 	draw_3d_fov(cube);
 	mlx_put_image_to_window(cube->connection, \
 	cube->window_3d.ptr, cube->scene3d.ptr, 0, 0);

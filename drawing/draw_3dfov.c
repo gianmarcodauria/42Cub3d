@@ -1,5 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_3dfov.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 16:40:58 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 16:42:56 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3d.h"
 
 int	get_oriented_texture_color(int orientation)
 {
@@ -24,10 +35,6 @@ int	get_orientation_id(int orientation)
 	else
 		return (3);
 }
-
-
-
-
 
 static void	set_pixels(int x_texture, t_cube *cube, t_ray ray)
 {
@@ -61,13 +68,15 @@ static void	set_pixels(int x_texture, t_cube *cube, t_ray ray)
 /*objective: visualiza all you can see in 3D Window.
 This functions wrap-up different functions IOT
 print ne vertical line in the 3D win.*/
-void	draw_3d_vertical_line(t_cube *cube, t_ray ray, double saved_left_half_fov)
+void	draw_3d_vertical_line(t_cube *cube, t_ray ray,
+		double saved_left_half_fov)
 {
 	int		x_text;
 	t_point	end_point;
 
 	end_point = ray.end_point;
-	cube->player.ray.point_projection = find_intersection(cube->player.position, \
+	cube->player.ray.point_projection = find_intersection
+		(cube->player.position, \
 	cube->player.perpendicular_direction, end_point, cube->player.direction);
 	cube->player.ray.x_wall_line = find_x_3d(cube->player.fov.half_left, \
 	saved_left_half_fov, cube->window_3d.width);
