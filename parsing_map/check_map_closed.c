@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_closed.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:40:19 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:40:47 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void	check_previous_row(t_cube *cube, char **map_lines, int prev_r_len, int i)
+void	check_previous_row(t_cube *cube, char **map_lines, int prev_r_len,
+			int i)
 {
 	int	j;
 	int	row_length;
@@ -119,7 +132,6 @@ void	check_first_last_column(t_cube *cube, char **map_lines, int height)
 		i++;
 	}
 }
-
 
 void	check_map_closed(t_cube *cube, char **map_lines)
 {

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 17:37:34 by ccalabro          #+#    #+#             */
+/*   Updated: 2025/04/28 17:39:52 by ccalabro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -35,6 +46,7 @@ char	*parse_extention(char *path_of_map)
 	free(matrix_of_words);
 	return (extention);
 }
+
 // ok modificato
 void	exit_message(t_cube *cube, char *message)
 {
@@ -69,6 +81,7 @@ char	*read_texture_data(int fd)
 	}
 	return (content_file);
 }
+
 //AA DA VEDERE
 int	process_line(int fd, char **content_file, int *before_cont, int *blank_line)
 {
@@ -225,7 +238,6 @@ void	parse_and_check(t_cube *cube)
 	check_map_closed(cube, map_lines);
 }
 
-
 void	define_map(t_cube *cube, char *path_of_map)
 {
 	int		fd;
@@ -245,15 +257,9 @@ void	define_map(t_cube *cube, char *path_of_map)
 		exit_message(cube, "Error: invalid path.\n");
 	fd = open(path_of_map, O_RDONLY);
 	if (fd == -1)
-		exit_message(cube, "Error: an error occurred while reading the file.\n");
+		exit_message(cube, "Error: a error occurred while reading the file.\n");
 	cube->file_map.texture_data = read_texture_data(fd);
 	cube->file_map.map_data = read_map_data(cube, fd);
 	parse_and_check(cube);
 }
-
-
-
-
-
 //inserisci anche le altre del main
-
