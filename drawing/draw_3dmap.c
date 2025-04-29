@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:47:06 by ccalabro          #+#    #+#             */
-/*   Updated: 2025/04/28 16:48:30 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:19:16 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	draw_3d_scene(t_cube *cube)
 	&cube->scene3d.endian);
 	draw_floor(cube);
 	draw_ceiling(cube);
-	printf("ssssssss\n");
 	draw_3d_fov(cube);
 	mlx_put_image_to_window(cube->connection, \
 	cube->window_3d.ptr, cube->scene3d.ptr, 0, 0);
