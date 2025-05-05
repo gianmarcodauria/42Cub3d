@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/04/28 17:13:49 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:47:03 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 #include <ctype.h>
 #include <math.h>
 #include "libft.h"
+
+
+
+
 
 #define IS_2D 1
 #define PI_FIX 0.00000001
@@ -70,7 +74,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#define SHOW_WITH_COLORS 1
+#define SHOW_WITH_COLORS 0
 
 #define NUM_OF_RAYS 1000
 
@@ -162,6 +166,10 @@ typedef struct s_map
 	char	**grid;
 	char	*floor_color;
 	char	*ceiling_color;
+	char		*no_texture;
+	char		*so_texture;
+	char		*we_texture;
+	char		*ea_texture;
 }	t_map;
 
 typedef struct s_image
@@ -174,6 +182,7 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
+
 
 typedef struct s_cube
 {
@@ -246,3 +255,25 @@ double	calculate_3d_wall_height(t_player player);
 
 double	find_x_3d(double ray_angle, double fov_left_ray, double win_width);
 int		find_x_texture(t_point impact_point, t_ray ray);
+
+
+//5 maggio
+
+#define INVALID_PATH "Error\nInvalid path!\n"
+#define INVALID_PARAMS "Error\nThe only allowed parameter is the path\
+ of the map with .cub extension!\nUsage:\n./cub3d <map_path>\n"
+#define INVALID_MAP "Error\nInvalid map!\n"
+#define MAP_NOT_CLOSED "Error\nThe map must be closed/surrounded by walls!\n"
+#define INVALID_CHARACTER "Error\nThe map must contains: only 'space', '0', \
+'1', and one of 'N', 'S', 'E', 'W'.\n"
+#define INVALID_TEXTURE_PATH "Error\nInvalid texture path!\n"
+#define INVALID_COLOR_FORMAT "Error\nInvalid color format! Colors must be in\
+ the format R,G,B with values in the range [0,255].\n"
+#define MISSING_INFORMATION "Error\nMissing texture or color information!\n"
+#define INVALID_ELEMENT_ORDER "Error\nInvalid element order! The map content \
+must be the last element in the file.\n"
+#define FILE_READ_ERROR "Error\nAn error occurred while reading the file!\n"
+
+
+void	define_textures(t_cube *cube);
+void	error_exit(t_cube *cube, char *message);

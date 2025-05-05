@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:37:34 by ccalabro          #+#    #+#             */
-/*   Updated: 2025/04/28 17:39:52 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:38:30 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,17 +183,17 @@ int	get_orientation(char c)
 		return (W);
 }
 
-int	checks(char **lines, t_map *raw_map, int i, int j)
+int	checks(char **lines, t_map *file_map, int i, int j)
 {
 	if (!is_map_character(lines[i][j]))
 		return (1);
 	else if (is_player_character(lines[i][j]))
 	{
-		if (!raw_map->player_orientation)
+		if (!file_map->player_orientation)
 		{
-			raw_map->player_position = (t_point) \
+			file_map->player_position = (t_point) \
 			{j * 64 + 64 / 2, i * 64 + 64 / 2};
-			raw_map->player_orientation = get_orientation(lines[i][j]);
+			file_map->player_orientation = get_orientation(lines[i][j]);
 		}
 		else
 			return (1);
@@ -201,7 +201,7 @@ int	checks(char **lines, t_map *raw_map, int i, int j)
 	return (0);
 }
 
-int	check_map_characters(t_map *raw_map, char **lines)
+int	check_map_characters(t_map *file_map, char **lines)
 {
 	int	i;
 	int	j;
@@ -212,21 +212,272 @@ int	check_map_characters(t_map *raw_map, char **lines)
 		j = -1;
 		while (lines[i][++j])
 		{
-			if (checks(lines, raw_map, i, j))
+			if (checks(lines, file_map, i, j))
 				return (1);
 		}
 	}
-	if (!raw_map->player_orientation)
+	if (!file_map->player_orientation)
 		return (1);
 	return (0);
 }
+
+
+
+
+int	check_texture_path(t_map *file_map, char *line)
+{
+	char	*path;
+	char	*ptr;
+
+	ptr = ft_strchr(line, ' ');
+	if (!ptr)
+		return (2);
+	path = ft_strdup(ptr + 1);
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		file_map->no_texture = path;
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		file_map->so_texture = path;
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		file_map->we_texture = path;
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		file_map->ea_texture = path;
+	else
+		return (free(path), 2);
+	if (access(path, F_OK) == -1)
+		return (1);
+	return (0);
+}
+
+int	are_information_set(t_map file_map)
+{
+	if (!file_map.no_texture || !file_map.so_texture || !file_map.we_texture \
+	|| !file_map.ea_texture || !file_map.floor_color || !file_map.ceiling_color)
+		return (0);
+	return (1);
+}
+
+
+
+// 5 maggio
+
+void	remove_consecutives_space(char **lines)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	while (lines[i])
+	{
+		j = 0;
+		while (lines[i][j])
+		{
+			if (lines[i][j] == ' ' && lines[i][j + 1] == ' ')
+			{
+				k = j;
+				while (lines[i][k])
+				{
+					lines[i][k] = lines[i][k + 1];
+					k++;
+				}
+				lines[i][k] = '\0';
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	remove_last_space(char **lines)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (lines[i])
+	{
+		j = ft_strlen(lines[i]) - 1;
+		while (j >= 0 && lines[i][j] == ' ')
+		{
+			lines[i][j] = '\0';
+			j--;
+		}
+		i++;
+	}
+}
+
+void	remove_extra_space(char **lines)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = -1;
+	while (lines[++i])
+	{
+		j = 0;
+		while (lines[i][j] == ' ')
+			j++;
+		if (j > 0)
+		{
+			k = 0;
+			while (lines[i][j + k])
+			{
+				lines[i][k] = lines[i][j + k];
+				k++;
+			}
+			lines[i][k] = '\0';
+		}
+	}
+	remove_consecutives_space(lines);
+	remove_last_space(lines);
+}
+
+int	are_all_digits(char **splitted)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (splitted[i])
+	{
+		j = 0;
+		while (splitted[i][j])
+		{
+			if (!ft_isdigit(splitted[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	check_color_format(t_map *file_map, char *line)
+{
+	char	**splitted;
+	char	*color;
+
+	if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
+	{
+		color = ft_strchr(line, ' ') + 1;
+		splitted = ft_split(color, ',');
+		if (ft_arrlen(splitted) == 3)
+		{
+			if (!(ft_atoi(splitted[0]) < 0 || ft_atoi(splitted[0]) > 255 || \
+			ft_atoi(splitted[1]) < 0 || ft_atoi(splitted[1]) > 255 || \
+			ft_atoi(splitted[2]) < 0 || ft_atoi(splitted[2]) > 255) && \
+			are_all_digits(splitted))
+			{
+				if (ft_strncmp(line, "F ", 2) == 0)
+					file_map->floor_color = ft_strdup(color);
+				else
+					file_map->ceiling_color = ft_strdup(color);
+				return (ft_free_matrix(splitted, -1), 0);
+			}
+		}
+		return (ft_free_matrix(splitted, -1), 1);
+	}
+	return (2);
+}
+
+
+void	free_file_map(t_cube *cube)
+{
+	if (cube->file_map.texture_data)
+		free(cube->file_map.texture_data);
+	if (cube->file_map.map_data)
+		free(cube->file_map.map_data);
+	if (cube->file_map.grid)
+		ft_free_matrix(cube->file_map.grid, -1);
+	if (cube->file_map.no_texture)
+		free(cube->file_map.no_texture);
+	if (cube->file_map.so_texture)
+		free(cube->file_map.so_texture);
+	if (cube->file_map.we_texture)
+		free(cube->file_map.we_texture);
+	if (cube->file_map.ea_texture)
+		free(cube->file_map.ea_texture);
+	if (cube->file_map.floor_color)
+		free(cube->file_map.floor_color);
+	if (cube->file_map.ceiling_color)
+		free(cube->file_map.ceiling_color);
+	if (cube->map_lines)
+		ft_free_matrix(cube->map_lines, -1);
+}
+
+int	on_destroy(t_cube *cube)
+{
+	free_file_map(cube);
+	if (cube->window_3d.ptr)
+		mlx_destroy_window(cube->connection, cube->window_3d.ptr);
+	if (cube->window_2d.ptr)
+		mlx_destroy_window(cube->connection, cube->window_2d.ptr);
+	if (cube->connection)
+	{
+		if (cube->map_image.ptr)
+			mlx_destroy_image(cube->connection, cube->map_image.ptr);
+		if (cube->scene3d.ptr)
+			mlx_destroy_image(cube->connection, cube->scene3d.ptr);
+		if (cube->texture[0].ptr)
+			mlx_destroy_image(cube->connection, cube->texture[0].ptr);
+		if (cube->texture[1].ptr)
+			mlx_destroy_image(cube->connection, cube->texture[1].ptr);
+		if (cube->texture[2].ptr)
+			mlx_destroy_image(cube->connection, cube->texture[2].ptr);
+		if (cube->texture[3].ptr)
+			mlx_destroy_image(cube->connection, cube->texture[3].ptr);
+		mlx_destroy_display(cube->connection);
+		free(cube->connection);
+	}
+	return (exit(0), 0);
+}
+
+void	error_exit(t_cube *cube, char *message)
+{
+	printf("%s\n", message);
+	if (cube)
+		on_destroy(cube);
+	exit(0);
+}
+
+void	check_texture_data(t_cube *cube)
+{
+	t_map	*file_map;
+	char	**lines;
+	int		status;
+	int		status2;
+	int		i;
+
+	file_map = &cube->file_map;
+	lines = ft_split(file_map->texture_data, '\n');
+	cube->map_lines = lines;
+	i = -1;
+	remove_extra_space(lines);
+	while (lines[++i])
+	{
+		status = check_texture_path(file_map, lines[i]);
+		if (status == 1)
+			error_exit(cube, INVALID_TEXTURE_PATH);
+		status2 = check_color_format(file_map, lines[i]);
+		if (status2 == 1)
+			error_exit(cube, INVALID_COLOR_FORMAT);
+		if (status2 == 2 && status == 2)
+			error_exit(cube, INVALID_MAP);
+	}
+	if (!are_information_set(*file_map))
+		error_exit(cube, MISSING_INFORMATION);
+}
+
+// fine 5 maggio
+
 
 void	parse_and_check(t_cube *cube)
 {
 	t_map	*file_map;
 	char	**map_lines;
 
-	//check_texture_data(cube);
+	check_texture_data(cube);
 	file_map = &cube->file_map;
 	map_lines = ft_split(file_map->map_data, '\n');
 	cube->file_map.grid = map_lines;

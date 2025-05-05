@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:47:06 by ccalabro          #+#    #+#             */
-/*   Updated: 2025/04/29 15:19:16 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:55:59 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	get_color_in_hex(char *color)
 	return (r << 16 | g << 8 | b);
 }
 
-/*remember that the coordinates of y go greater down*/
 void	draw_floor(t_cube *cube)
 {
 	int	x;
@@ -67,8 +66,6 @@ void	draw_ceiling(t_cube *cube)
 	}
 }
 
-/*disegna la scena 3d: ovvero mette tutto nello stringone:
-prima il cielo, poi la terra, e poi i muri...*/
 void	draw_3d_scene(t_cube *cube)
 {
 	cube->scene3d.width = cube->window_3d.width;
