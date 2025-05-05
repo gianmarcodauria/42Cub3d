@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/05 18:47:03 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:05:49 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 #include <ctype.h>
 #include <math.h>
 #include "libft.h"
-
-
-
-
 
 #define IS_2D 1
 #define PI_FIX 0.00000001
@@ -166,10 +162,10 @@ typedef struct s_map
 	char	**grid;
 	char	*floor_color;
 	char	*ceiling_color;
-	char		*no_texture;
-	char		*so_texture;
-	char		*we_texture;
-	char		*ea_texture;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
 }	t_map;
 
 typedef struct s_image
@@ -182,7 +178,6 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
-
 
 typedef struct s_cube
 {
@@ -256,9 +251,7 @@ double	calculate_3d_wall_height(t_player player);
 double	find_x_3d(double ray_angle, double fov_left_ray, double win_width);
 int		find_x_texture(t_point impact_point, t_ray ray);
 
-
 //5 maggio
-
 #define INVALID_PATH "Error\nInvalid path!\n"
 #define INVALID_PARAMS "Error\nThe only allowed parameter is the path\
  of the map with .cub extension!\nUsage:\n./cub3d <map_path>\n"
@@ -273,7 +266,6 @@ int		find_x_texture(t_point impact_point, t_ray ray);
 #define INVALID_ELEMENT_ORDER "Error\nInvalid element order! The map content \
 must be the last element in the file.\n"
 #define FILE_READ_ERROR "Error\nAn error occurred while reading the file!\n"
-
 
 void	define_textures(t_cube *cube);
 void	error_exit(t_cube *cube, char *message);

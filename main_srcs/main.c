@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:41:45 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/05 18:14:01 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:06:27 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,10 @@ int	main(int argc, char **argv)
 	parse_argc(argc);
 	define_map(&cube, argv[1]);
 	define_windows(&cube);
-
 	define_textures(&cube);
-
 	if (IS_2D == 1)
 		visualize_in_2d(&cube);
 	draw_3d_scene(&cube);
-
 	define_hook_loop(&cube);
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:37:34 by ccalabro          #+#    #+#             */
-/*   Updated: 2025/05/05 18:38:30 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:08:24 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,10 @@ void	parse_argc(int argc)
 	if (argc != 2)
 	{
 		printf("ERROR: WRONG ARGC\n");
-		//implementa funzione per freeare
-		//la struct
-		//dato che nel main cio che fai per primo
-		//é inizializzare la t_cube
 		exit(0);
 	}
 }
 
-//ok sono stati modificati variabili
 char	*parse_extention(char *path_of_map)
 {
 	char	**matrix_of_words;
@@ -47,7 +42,6 @@ char	*parse_extention(char *path_of_map)
 	return (extention);
 }
 
-// ok modificato
 void	exit_message(t_cube *cube, char *message)
 {
 	printf("%s\n", message);
@@ -56,7 +50,6 @@ void	exit_message(t_cube *cube, char *message)
 	exit(0);
 }
 
-//AAA DA VEDERE
 char	*read_texture_data(int fd)
 {
 	char	*line;
@@ -82,7 +75,6 @@ char	*read_texture_data(int fd)
 	return (content_file);
 }
 
-//AA DA VEDERE
 int	process_line(int fd, char **content_file, int *before_cont, int *blank_line)
 {
 	char	*line;
@@ -104,7 +96,6 @@ int	process_line(int fd, char **content_file, int *before_cont, int *blank_line)
 	return (0);
 }
 
-//AAA DA VEDERE
 char	*read_map_data(t_cube *cube, int fd)
 {
 	char	*content_file;
@@ -221,9 +212,6 @@ int	check_map_characters(t_map *file_map, char **lines)
 	return (0);
 }
 
-
-
-
 int	check_texture_path(t_map *file_map, char *line)
 {
 	char	*path;
@@ -256,10 +244,7 @@ int	are_information_set(t_map file_map)
 	return (1);
 }
 
-
-
 // 5 maggio
-
 void	remove_consecutives_space(char **lines)
 {
 	int	i;
@@ -381,7 +366,6 @@ int	check_color_format(t_map *file_map, char *line)
 	return (2);
 }
 
-
 void	free_file_map(t_cube *cube)
 {
 	if (cube->file_map.texture_data)
@@ -470,8 +454,6 @@ void	check_texture_data(t_cube *cube)
 }
 
 // fine 5 maggio
-
-
 void	parse_and_check(t_cube *cube)
 {
 	t_map	*file_map;
