@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/06 15:57:08 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:17:18 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,9 @@ void	define_map(t_cube *cube, char *path_of_map);
 void	check_map_closed(t_cube *cube, char **map_lines);
 void	put_pixel(t_image *img, int x, int y, int color);
 void	bresenham(t_cube *cube, int x1, int y1, int color);
+void	check_next_row(t_cube *cube, char **map_lines, int next_r_len, int i);
+void	check_previous_row(t_cube *cube, char **map_lines, int prev_r_len,
+			int i);
 void	move_player_mains(int direction, t_move move, t_point *position,
 			int step_decr);
 void	move_player_oblq(int direction, t_move move, t_point *position,

@@ -6,44 +6,11 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:40:19 by ccalabro          #+#    #+#             */
-/*   Updated: 2025/04/28 17:40:47 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:13:40 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	check_previous_row(t_cube *cube, char **map_lines, int prev_r_len,
-			int i)
-{
-	int	j;
-	int	row_length;
-
-	row_length = strlen(map_lines[i]);
-	j = row_length;
-	while (j < prev_r_len)
-	{
-		if (map_lines[i - 1][j] != '1')
-			exit_message(cube, \
-			"Error\nMap is not closed: gap in shorter row (previous row)");
-		j++;
-	}
-}
-
-void	check_next_row(t_cube *cube, char **map_lines, int next_r_len, int i)
-{
-	int	j;
-	int	row_length;
-
-	row_length = strlen(map_lines[i]);
-	j = row_length;
-	while (j < next_r_len)
-	{
-		if (map_lines[i + 1][j] != '1')
-			exit_message(cube, \
-			"Error\nMap is not closed: gap in shorter row (next row)");
-		j++;
-	}
-}
 
 void	check_shorter_rows(t_cube *cube, char **map_lines, int height)
 {
@@ -55,12 +22,12 @@ void	check_shorter_rows(t_cube *cube, char **map_lines, int height)
 	i = 1;
 	while (i < height)
 	{
-		row_length = strlen(map_lines[i]);
-		prev_row_length = strlen(map_lines[i - 1]);
+		row_length = ft_strlen(map_lines[i]);
+		prev_row_length = ft_strlen(map_lines[i - 1]);
 		check_previous_row(cube, map_lines, prev_row_length, i);
 		if (i >= height - 1)
 			break ;
-		next_row_length = strlen(map_lines[i + 1]);
+		next_row_length = ft_strlen(map_lines[i + 1]);
 		if (row_length < next_row_length)
 			check_next_row(cube, map_lines, next_row_length, i);
 		i++;
