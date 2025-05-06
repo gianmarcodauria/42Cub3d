@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/05 19:05:49 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:54:12 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ typedef struct s_point
 
 typedef struct s_bras_params
 {
+	int		color;
 	t_point	xy0;
 	t_point	dx;
 	t_point	sx;
-	int		color;
 }	t_bras_params;
 
 typedef struct s_fov
@@ -107,26 +107,26 @@ typedef struct s_dim
 
 typedef struct s_window
 {
-	void	*ptr;
 	int		width;
 	int		height;
+	void	*ptr;
 }	t_window;
 
 typedef struct s_ray
 {
 	int		cardinal_direction;
 	int		orientation;
+	int		last_increment;
+	double	height_wall_line;
+	double	x_wall_line;
+	double	len_projection;
 	t_point	first_side_point;
 	t_point	first_impact_point;
 	t_point	delta;
 	t_point	path;
 	t_point	spawn_point;
 	t_point	end_point;
-	int		last_increment;
-	double	height_wall_line;
-	double	x_wall_line;
 	t_point	point_projection;
-	double	len_projection;
 }	t_ray;
 
 typedef struct s_move
@@ -139,9 +139,6 @@ typedef struct s_move
 
 typedef struct s_player
 {
-	t_point	position;
-	t_point	tile;
-	t_move	move;
 	int		cardinal_direction;
 	double	direction;
 	double	perpendicular_direction;
@@ -149,16 +146,18 @@ typedef struct s_player
 	double	rotate_left;
 	t_fov	fov;
 	t_ray	ray;
+	t_move	move;
+	t_point	tile;
+	t_point	position;
 }	t_player;
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
+	int		player_orientation;
 	char	*texture_data;
 	char	*map_data;
-	t_point	player_position;
-	int		player_orientation;
 	char	**grid;
 	char	*floor_color;
 	char	*ceiling_color;
@@ -166,90 +165,84 @@ typedef struct s_map
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
+	t_point	player_position;
 }	t_map;
 
 typedef struct s_image
 {
-	void	*ptr;
-	char	*data_addr;
 	int		size_line;
 	int		bits_x_pixel;
 	int		endian;
 	int		width;
 	int		height;
+	char	*data_addr;
+	void	*ptr;
 }	t_image;
 
 typedef struct s_cube
 {
+	char		**map_lines;
 	void		*connection;
+	t_map		file_map;
+	t_image		texture[4];
+	t_image		map_image;
+	t_image		scene3d;
+	t_player	player;
 	t_window	window_2d;
 	t_window	window_3d;
-	t_map		file_map;
-	char		**map_lines;
-	t_player	player;
-	t_image		texture[4];
-	t_image		scene3d;
-	t_image		map_image;
 }	t_cube;
 
 //FUNCTIONS IN MAIN.C FILE
+int		destroy(t_cube *cube);
+int		update_movement(void *param);
+int		get_color_in_hex(char *color);
+int		west(int x, int y, t_cube *cube);
+int		north(int x, int y, t_cube *cube);
+int		key_press(int keycode, void *param);
+int		n_corner(int x, int y, t_cube *cube);
+int		get_cardinal_direction(double angle);
+int		key_release(int keycode, void *param);
+int		get_pixel(t_image *image, int x, int y);
+int		get_direction(double perpendicular_direction);
+int		find_x_texture(t_point impact_point, t_ray ray);
+int		is_it_a_wall(t_point point_to_verify, char **map_grid);
+int		step_management(t_player *player, int foot_step_decrement);
+int		is_it_inside_map_perimeter(t_point point, int width, int height);
+int		is_collision(double player_next_x, double player_next_y, t_cube *cube);
+int		is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point p);
 void	parse_argc(int argc);
+void	draw_3d_fov(t_cube *cube);
+void	initialize_ray(t_ray *ray);
+void	draw_3d_scene(t_cube *cube);
 void	initialization(t_cube *cube);
-void	point_init(t_point *point_to_initialize);
-void	define_map(t_cube *cube, char *path_of_map);
 void	define_windows(t_cube *cube);
 void	define_textures(t_cube *cube);
+void	drawing_routine(t_cube *cube);
+void	drawing_routine(t_cube *cube);
 void	visualize_in_2d(t_cube *cube);
 void	visualize_in_3d(t_cube *cube);
 void	define_hook_loop(t_cube *cube);
-void	check_map_closed(t_cube *cube, char **map_lines);
+void	point_init(t_point *point_to_initialize);
 void	exit_message(t_cube *cube, char *message);
-int		update_movement(void *param);
-t_point	find_tile(t_point point);
-int		key_press(int keycode, void *param);
-int		key_release(int keycode, void *param);
-int		destroy(t_cube *cube);
-int		step_management(t_player *player, int foot_step_decrement);
-int		is_collision(double player_next_x, double player_next_y, t_cube *cube);
-void	drawing_routine(t_cube *cube);
+void	define_map(t_cube *cube, char *path_of_map);
+void	check_map_closed(t_cube *cube, char **map_lines);
+void	put_pixel(t_image *img, int x, int y, int color);
+void	bresenham(t_cube *cube, int x1, int y1, int color);
 void	move_player_mains(int direction, t_move move, t_point *position,
 			int step_decr);
 void	move_player_oblq(int direction, t_move move, t_point *position,
 			int step_decr);
-int		get_direction(double perpendicular_direction);
-void	drawing_routine(t_cube *cube);
-t_point	chose_side_point(t_point spawn_point, int cardinal_direction);
-t_point	calculate_path(t_point delta, double alpha);
-t_point	calc_delta(t_point spawn_point, t_point second_point, int direction);
-t_point	calculate_end_point(t_ray *ray, double alpha, t_cube *c3d);
-t_point	trigonometric_point_calc(t_point point, double path, double alpha);
-
-t_ray	dda(t_point start_point, double alpha, t_cube *c3d);
-int		is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point p);
-int		is_it_a_wall(t_point point_to_verify, char **map_grid);
-int		get_cardinal_direction(double angle);
-int		is_it_inside_map_perimeter(t_point point, int width, int height);
-void	initialize_ray(t_ray *ray);
-
-int		north(int x, int y, t_cube *cube);
-int		n_corner(int x, int y, t_cube *cube);
-int		west(int x, int y, t_cube *cube);
-void	draw_3d_scene(t_cube *cube);
-void	draw_3d_fov(t_cube *cube);
-
-void	put_pixel(t_image *img, int x, int y, int color);
-int		get_color_in_hex(char *color);
-
-t_point	find_intersection(t_point p1, double p1_ang, t_point p2, double p2_ang);
-double	pitagora_theorem(t_point spawn_point, t_point second_point);
-
-void	bresenham(t_cube *cube, int x1, int y1, int color);
-
-int		get_pixel(t_image *image, int x, int y);
 double	calculate_3d_wall_height(t_player player);
-
+double	pitagora_theorem(t_point spawn_point, t_point second_point);
 double	find_x_3d(double ray_angle, double fov_left_ray, double win_width);
-int		find_x_texture(t_point impact_point, t_ray ray);
+t_ray	dda(t_point start_point, double alpha, t_cube *c3d);
+t_point	find_tile(t_point point);
+t_point	calculate_path(t_point delta, double alpha);
+t_point	calculate_end_point(t_ray *ray, double alpha, t_cube *c3d);
+t_point	chose_side_point(t_point spawn_point, int cardinal_direction);
+t_point	trigonometric_point_calc(t_point point, double path, double alpha);
+t_point	calc_delta(t_point spawn_point, t_point second_point, int direction);
+t_point	find_intersection(t_point p1, double p1_ang, t_point p2, double p2_ang);
 
 //5 maggio
 #define INVALID_PATH "Error\nInvalid path!\n"
