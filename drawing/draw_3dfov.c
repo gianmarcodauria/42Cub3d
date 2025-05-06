@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:40:58 by ccalabro          #+#    #+#             */
-/*   Updated: 2025/04/28 16:42:56 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:30:10 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ static void	set_pixels(int x_texture, t_cube *cube, t_ray ray)
 	}
 }
 
-/*objective: visualiza all you can see in 3D Window.
-This functions wrap-up different functions IOT
-print ne vertical line in the 3D win.*/
 void	draw_3d_vertical_line(t_cube *cube, t_ray ray,
 		double saved_left_half_fov)
 {
@@ -88,11 +85,6 @@ void	draw_3d_vertical_line(t_cube *cube, t_ray ray,
 	set_pixels(x_text, cube, ray);
 }
 
-/*itero dal confine sinistro del fov al confine destro.
-cosi facendo vado a prendere di vola in volta, in ogni iterazione,
-il punto di ipatto calcolato con il dda.
-questo punto di impatto lo passo (sempre nell'ambito di quella iterazione)
-alla funzione visualize_3d*/
 void	draw_3d_fov(t_cube *cube)
 {
 	double	angle_variation;
