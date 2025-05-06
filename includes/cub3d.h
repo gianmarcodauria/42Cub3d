@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/06 15:45:31 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:57:08 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,9 @@ typedef struct s_cube
 }	t_cube;
 
 //FUNCTIONS IN MAIN.C FILE
+int		moving(t_cube *cube);
 int		destroy(t_cube *cube);
+int		set_rotation(t_cube *cube);
 int		update_movement(void *param);
 int		get_color_in_hex(char *color);
 int		west(int x, int y, t_cube *cube);
