@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/06 14:54:12 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:45:31 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ void	drawing_routine(t_cube *cube);
 void	visualize_in_2d(t_cube *cube);
 void	visualize_in_3d(t_cube *cube);
 void	define_hook_loop(t_cube *cube);
+void	draw_2d_fov_boundaries(t_cube *cube);
 void	point_init(t_point *point_to_initialize);
 void	exit_message(t_cube *cube, char *message);
 void	define_map(t_cube *cube, char *path_of_map);
@@ -243,7 +244,6 @@ t_point	chose_side_point(t_point spawn_point, int cardinal_direction);
 t_point	trigonometric_point_calc(t_point point, double path, double alpha);
 t_point	calc_delta(t_point spawn_point, t_point second_point, int direction);
 t_point	find_intersection(t_point p1, double p1_ang, t_point p2, double p2_ang);
-
 //5 maggio
 #define INVALID_PATH "Error\nInvalid path!\n"
 #define INVALID_PARAMS "Error\nThe only allowed parameter is the path\
