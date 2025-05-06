@@ -6,7 +6,7 @@
 /*   By: ccalabro <ccalabro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:47 by gd-auria          #+#    #+#             */
-/*   Updated: 2025/05/06 16:17:18 by ccalabro         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:14:15 by ccalabro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,14 +192,17 @@ typedef struct s_cube
 	t_window	window_3d;
 }	t_cube;
 
-//FUNCTIONS IN MAIN.C FILE
 int		moving(t_cube *cube);
 int		destroy(t_cube *cube);
+int		get_orientation(char c);
+int		is_map_character(char c);
 int		set_rotation(t_cube *cube);
+int		is_player_character(char c);
 int		update_movement(void *param);
 int		get_color_in_hex(char *color);
 int		west(int x, int y, t_cube *cube);
 int		north(int x, int y, t_cube *cube);
+int		are_information_set(t_map file_map);
 int		key_press(int keycode, void *param);
 int		n_corner(int x, int y, t_cube *cube);
 int		get_cardinal_direction(double angle);
@@ -207,14 +210,21 @@ int		key_release(int keycode, void *param);
 int		get_pixel(t_image *image, int x, int y);
 int		get_direction(double perpendicular_direction);
 int		find_x_texture(t_point impact_point, t_ray ray);
+int		check_texture_path(t_map *file_map, char *line);
+int		check_color_format(t_map *file_map, char *line);
+int		check_map_characters(t_map *file_map, char **lines);
 int		is_it_a_wall(t_point point_to_verify, char **map_grid);
 int		step_management(t_player *player, int foot_step_decrement);
 int		is_it_inside_map_perimeter(t_point point, int width, int height);
 int		is_collision(double player_next_x, double player_next_y, t_cube *cube);
 int		is_it_passing_between_two_walls(t_ray *ray, char **map_grid, t_point p);
+char	*read_texture_data(int fd);
+char	*parse_extention(char *path_of_map);
+char	*read_map_data(t_cube *cube, int fd);
 void	parse_argc(int argc);
 void	draw_3d_fov(t_cube *cube);
 void	initialize_ray(t_ray *ray);
+void	free_file_map(t_cube *cube);
 void	draw_3d_scene(t_cube *cube);
 void	initialization(t_cube *cube);
 void	define_windows(t_cube *cube);
@@ -223,8 +233,13 @@ void	drawing_routine(t_cube *cube);
 void	drawing_routine(t_cube *cube);
 void	visualize_in_2d(t_cube *cube);
 void	visualize_in_3d(t_cube *cube);
+void	define_textures(t_cube *cube);
 void	define_hook_loop(t_cube *cube);
+void	remove_extra_space(char **lines);
 void	draw_2d_fov_boundaries(t_cube *cube);
+void	error_exit(t_cube *cube, char *message);
+void	define_player_orientation(t_cube *cube);
+void	remove_consecutives_space(char **lines);
 void	point_init(t_point *point_to_initialize);
 void	exit_message(t_cube *cube, char *message);
 void	define_map(t_cube *cube, char *path_of_map);
@@ -249,7 +264,7 @@ t_point	chose_side_point(t_point spawn_point, int cardinal_direction);
 t_point	trigonometric_point_calc(t_point point, double path, double alpha);
 t_point	calc_delta(t_point spawn_point, t_point second_point, int direction);
 t_point	find_intersection(t_point p1, double p1_ang, t_point p2, double p2_ang);
-//5 maggio
+
 #define INVALID_PATH "Error\nInvalid path!\n"
 #define INVALID_PARAMS "Error\nThe only allowed parameter is the path\
  of the map with .cub extension!\nUsage:\n./cub3d <map_path>\n"
@@ -264,6 +279,3 @@ t_point	find_intersection(t_point p1, double p1_ang, t_point p2, double p2_ang);
 #define INVALID_ELEMENT_ORDER "Error\nInvalid element order! The map content \
 must be the last element in the file.\n"
 #define FILE_READ_ERROR "Error\nAn error occurred while reading the file!\n"
-
-void	define_textures(t_cube *cube);
-void	error_exit(t_cube *cube, char *message);
